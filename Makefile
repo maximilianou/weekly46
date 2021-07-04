@@ -12,6 +12,19 @@ step00 view-hostname:
 	@echo '$(servers-exec-usr-id)'
 
 #####################################################
+## Functional Programming Typescript / Javascript
+step46_1000 node_typescript_init:
+	mkdir -p programming/fp01 && cd programming/fp01 && npm -y init 
+	cd programming/fp01 && npm i -D typescript ts-node
+	cd programming/fp01 && ./node_modules/.bin/tsc --init
+
+step46_1001 node_typescript_dev:
+	cd programming/fp01 && npm run dev
+step46_1200 node_typescript_clean:
+	rm -rf programming
+#####################################################
+
+#####################################################
 ## dapp defi
 step46_50 dapp_ui_init:
 	cd dapp/defi_tutorial && npm i
@@ -23,7 +36,7 @@ step46_53 web3_browser_metamask:
 	echo 'Install metamask in google chrome https://metamask.io/download.html'
 step46_54 web3_ganache_run:
 	cd dapp/defi_tutorial && ganache
-step46_55 web3_compile_contracts:
+step46_55 web3_truffle_install:
 	cd dapp/defi_tutorial && npm i -D truffle 
 step46_56 web3_compile_contracts:
 	cd dapp/defi_tutorial && ./node_modules/.bin/truffle compile

@@ -74,3 +74,10 @@ step46_55 web3_compile_contracts:
 step46_56 web3_compile_contracts:
 	cd dapp/defi_tutorial && ./node_modules/.bin/truffle compile
 ```
+
+-----
+-----
+-----
+
+## Some Functional Programming code.
+
