@@ -3,5 +3,5 @@ addEventListener("fetch", (event) => {
     status: 200, 
     headers: { "content-type": "text/plain"}
   });
-  event.responseWith(response);
+  event.respondWith(response);
 });
