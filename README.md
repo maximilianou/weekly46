@@ -16,9 +16,10 @@
 ```js
 addEventListener("fetch", (event) => {
   const response = new Response("Hi Deno Chat Step One!!", {
+    status: 200, 
     headers: { "content-type": "text/plain"}
   });
-  event.responseWith(response);
+  event.respondWith(response);
 });
 ```
 
@@ -36,7 +37,7 @@ TXT   denochat-api.simpledoers.com  deno-com-validation=1...
 - Validate - https://dash.deno.com/projects -> settings -> Domain
 - TLS - Get Automatic Certificate - https://dash.deno.com/projects -> settings -> Domain
 
-```yaml
+```bash
 git add .
 git commit -m 'feat(api): deploy deno Hi!!'
 git push
