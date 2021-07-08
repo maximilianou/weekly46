@@ -11,15 +11,40 @@ step00 view-hostname:
 	@echo $(servers-exec-cmd)
 	@echo '$(servers-exec-usr-id)'
 
+
+step46_1301 denochat_install:
+	curl -fsSL https://deno.land/x/install/install.sh | sh	
+	deno --version
+
+step46_1302 denochat_create:
+	mkdir -p denochat/api && mkdir -p denochat/ui
+
+step46_1303 denochat_:
+	cd denochat && 
+
+step46_1300 deno_clean:
+	rm -rf denochat
+
 #####################################################
 ## Functional Programming Typescript / Javascript
-step46_1000 node_typescript_init:
-	mkdir -p programming/fp01 && cd programming/fp01 && npm -y init 
-	cd programming/fp01 && npm i -D typescript ts-node
-	cd programming/fp01 && ./node_modules/.bin/tsc --init
+#step46_1000 node_typescript_init:
+#	mkdir -p programming/fp01 && cd programming/fp01 && npm -y init 
+#	cd programming/fp01 && npm i -D typescript ts-node
+#	cd programming/fp01 && ./node_modules/.bin/tsc --init
+#
+#step46_1001 node_typescript_dev:
+#	cd programming/fp01 && npm run dev
+#
+#step46_1002 node_fp_ts:
+#	cd programming/fp01 && npm i fp-ts
+#
+#step46_1003 node_fp03_ts:
+#	mkdir -p programming/fp03 && cd programming/fp03 && npm init -y && npm i create-fp-ts-lib  
+#	cd programming/fp03 && ./node_modules/.bin/create-fp-ts-lib --packageManager npm -q  -n api_lib
+#	cd programming/fp03/api_lib && npm i
 
-step46_1001 node_typescript_dev:
-	cd programming/fp01 && npm run dev
+
+
 step46_1200 node_typescript_clean:
 	rm -rf programming
 #####################################################

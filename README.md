@@ -1,6 +1,21 @@
 # weekly46
 
 ## Learning graphql and more
+-----
+-----
+-----
+
+
+### Deno Chat Deploy
+#### Deno install
+
+- https://deno.land/
+- https://deno.com/blog/deploy-beta1
+#### Deno deploy
+
+-----
+-----
+-----
 
 ### Start having a codebase from dappuniversity, 
 #### install ganache local blockchain network 
@@ -78,6 +93,4 @@ step46_56 web3_compile_contracts:
 -----
 -----
 -----
-
-## Some Functional Programming code.
 
