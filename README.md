@@ -12,6 +12,37 @@
 - https://deno.land/
 - https://deno.com/blog/deploy-beta1
 #### Deno deploy
+- denochat/api/index.js
+```js
+addEventListener("fetch", (event) => {
+  const response = new Response("Hi Deno Chat Step One!!", {
+    headers: { "content-type": "text/plain"}
+  });
+  event.responseWith(response);
+});
+```
+
+- https://github.com/maximilianou/weekly46/blob/main/denochat/api/index.js
+- https://dash.deno.com/projects -> create new project -> weekly46-denochat-api
+- https://dash.deno.com/projects -> settings -> Git -> https://github.com/maximilianou/weekly46/blob/main/denochat/api/index.js -> Link
+- Install "Deno Deploy GitHub App" in your github account
+- https://dash.deno.com/projects -> settings -> Domain 
+- DNS - your domain name registered/subdomain redirecto to .. 
+```
+A     denochat-api.simpledoers.com  34... 
+AAAA  denochat-api.simpledoers.com  26::0::: 
+TXT   denochat-api.simpledoers.com  deno-com-validation=1...
+```
+- Validate - https://dash.deno.com/projects -> settings -> Domain
+- TLS - Get Automatic Certificate - https://dash.deno.com/projects -> settings -> Domain
+
+```yaml
+git add .
+git commit -m 'feat(api): deploy deno Hi!!'
+git push
+```
+
+
 
 -----
 -----
