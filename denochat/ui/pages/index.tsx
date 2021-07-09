@@ -1,27 +1,22 @@
-import { h, IS_BROWSER, useState } from "../deps.ts";
+import { h, IS_BROWSER, useState, useEffect, useCallback } from "../deps.ts";
 
-export default function Home() {
-  return (
-    <div>
-      <p>
-        Welcome to `fresh`. Try update this message in the ./pages/index.tsx
-        file, and refresh.
-      </p>
-      <Counter />
-      <p>{IS_BROWSER ? "Viewing browser render." : "Viewing JIT render."}</p>
-    </div>
-  );
+interface Message {
+  text: string;
 }
 
-function Counter() {
-  const [count, setCount] = useState(0);
-  return <div>
-    <p>{count}</p>
-    <button onClick={() => setCount(count - 1)} disabled={!IS_BROWSER}>
-      -1
-    </button>
-    <button onClick={() => setCount(count + 1)} disabled={!IS_BROWSER}>
-      +1
-    </button>
-  </div>;
+export default function Home() {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const getMessages = useCallback( async () => {
+    const res = await fetch('https://denochat-api.simpledoers.com/messages');
+    const data = await res.json();
+    setMessages(data);
+  }, []);
+  useEffect( () => {
+    getMessages();
+  }, []);
+  return (
+    <div>
+      {JSON.stringify(messages)}
+    </div>
+  );
 }
