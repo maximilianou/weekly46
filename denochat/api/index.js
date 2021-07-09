@@ -19,9 +19,8 @@ router
 
 const app  = new Application();
 
-app.use( (ctx) => {
-  ctx.response.body = 'Hi, from oak deno module!!';
-});
+app.use(router.routes());
+app.use(router.allowedMethods());
 
 addEventListener('fetch', app.fetchEventHandler());
 
