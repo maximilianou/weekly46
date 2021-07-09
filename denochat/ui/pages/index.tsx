@@ -6,6 +6,7 @@ interface Message {
 
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([]);
+  const [text, setText] = useState("");
   const getMessages = useCallback( async () => {
     const res = await fetch('https://denochat-api.simpledoers.com/messages');
     const data = await res.json();
@@ -14,9 +15,24 @@ export default function Home() {
   useEffect( () => {
     getMessages();
   }, []);
+  const onSendMessage = useCallback(async () => {
+    await fetch('https://denochat-api.simpledoers.com/messages', {
+      method: 'POST',
+      headers: {
+        'content-type':'application/json'
+      },
+      body: JSON.stringify({
+        text
+      })
+    });
+    setText('');
+    getMessages();
+  }, [text]);
   return (
     <div>
-      {JSON.stringify(messages)}
+      <input type='text' value={text} onChange={ (evt) => setText(evt.target.value) } />
+      <button onClick={onSendMessage}>Add</button>
+      <div>{JSON.stringify(messages)}</div>
     </div>
   );
 }
