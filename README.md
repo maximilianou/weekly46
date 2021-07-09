@@ -148,7 +148,78 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 addEventListener('fetch', app.fetchEventHandler());
 ```
+### ui local access api, and send messages
 
+```tsx
+import { h, IS_BROWSER, useState, useEffect, useCallback } from "../deps.ts";
+interface Message {
+  text: string;
+}
+export default function Home() {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [text, setText] = useState("");
+  const getMessages = useCallback( async () => {
+    const res = await fetch('https://denochat-api.simpledoers.com/messages');
+    const data = await res.json();
+    setMessages(data);
+  }, []);
+  useEffect( () => {
+    getMessages();
+  }, []);
+  const onSendMessage = useCallback(async () => {
+    await fetch('https://denochat-api.simpledoers.com/messages', {
+      method: 'POST',
+      headers: {
+        'content-type':'application/json'
+      },
+      body: JSON.stringify({
+        text
+      })
+    });
+    setText('');
+    getMessages();
+  }, [text]);
+  return (
+    <div>
+      <input type='text' value={text} onChange={ (evt) => setText(evt.target.value) } />
+      <button onClick={onSendMessage}>Add</button>
+      <div>{JSON.stringify(messages)}</div>
+    </div>
+  );
+}
+```
+
+### Breadcast channel chat deno oak
+- https://deno.com/deploy/docs/runtime-broadcast-channel
+- denochat/api/index.js
+```js
+import { Application, Router } from 'https://deno.land/x/oak/mod.ts';
+import { oakCors } from 'https://deno.land/x/cors/mod.ts';
+const messages = [];
+const channel = new BroadcastChannel('chat');
+channel.onmessage = (event) => {
+  messages.push(event.data);
+}
+const router = new Router();
+router
+  .get('/', (ctx, next) => {
+    ctx.response.body = 'Deno Chat Server:';
+  })
+  .get('/messages', (ctx, next) => {
+    ctx.response.body = messages;
+  })
+  .post('/messages', async (ctx, next) => {
+    const message = await ctx.request.body().value;
+    messages.push(message);
+    channel.postMesssage(message);
+    ctx.response.body = messages;
+  });
+const app  = new Application();
+app.use( oakCors() );
+app.use(router.routes());
+app.use(router.allowedMethods());
+addEventListener('fetch', app.fetchEventHandler());
+```
 
 
 -----
