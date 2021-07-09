@@ -56,7 +56,47 @@ addEventListener('fetch', app.fetchEventHandler());
 
 ### Deploy changes 3 oak middelware Router
 
+- denochat/api/index.ts
+```ts
+import { Application, Router } from 'https://deno.land/x/oak/mod.ts';
+const messages = [];
+const router = new Router();
+router
+  .get('/', (ctx, next) => {
+    ctx.response.body = 'Deno Chat Server:';
+  })
+  .get('/messages', (ctx, next) => {
+    ctx.response.body = messages;
+  })
+  .post('/messages', async (ctx, next) => {
+    const message = await ctx.request.body().value;
+    messages.push(message);
+    ctx.response.body = messages;
+  })
+const app  = new Application();
+app.use(router.routes());
+app.use(router.allowedMethods());
+addEventListener('fetch', app.fetchEventHandler());
+```
 
+### Fresh - install ui ( like nextjs framework )
+
+
+https://github.com/lucacasonato/fresh
+
+- Makefile
+```
+step46_1303 denochat_ui:
+	deno install -A -f --no-check -n fresh https://raw.githubusercontent.com/lucacasonato/fresh/main/cli.ts
+	cd denochat && fresh init ui
+```
+
+### Run Local environment
+- Makefile
+```
+step46_1304 denochat_deployctl_local:
+	cd denochat/ui && deployctl run --no-check --watch main.ts
+```
 
 
 -----
