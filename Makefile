@@ -17,10 +17,17 @@ step46_1301 denochat_install:
 	deno --version
 
 step46_1302 denochat_create:
-	mkdir -p denochat/api && mkdir -p denochat/ui
+	mkdir -p denochat/api 
 
-step46_1303 denochat_:
-	cd denochat && 
+step46_1303 denochat_ui:
+	deno install -A -f --no-check -n fresh https://raw.githubusercontent.com/lucacasonato/fresh/main/cli.ts
+	cd denochat && fresh init ui
+
+step46_1304 denochat_deployctl_install:
+	deno install --allow-read --allow-write --allow-env --allow-net --allow-run --no-check -r -f https://deno.land/x/deploy/deployctl.ts
+
+step46_1305 denochat_deployctl_run:
+	cd denochat/ui && deployctl run --no-check --watch main.ts
 
 step46_1300 deno_clean:
 	rm -rf denochat

@@ -56,6 +56,72 @@ addEventListener('fetch', app.fetchEventHandler());
 
 ### Deploy changes 3 oak middelware Router
 
+- denochat/api/index.ts
+```ts
+import { Application, Router } from 'https://deno.land/x/oak/mod.ts';
+const messages = [];
+const router = new Router();
+router
+  .get('/', (ctx, next) => {
+    ctx.response.body = 'Deno Chat Server:';
+  })
+  .get('/messages', (ctx, next) => {
+    ctx.response.body = messages;
+  })
+  .post('/messages', async (ctx, next) => {
+    const message = await ctx.request.body().value;
+    messages.push(message);
+    ctx.response.body = messages;
+  })
+const app  = new Application();
+app.use(router.routes());
+app.use(router.allowedMethods());
+addEventListener('fetch', app.fetchEventHandler());
+```
+
+### Fresh - install ui ( like nextjs framework )
+
+
+https://github.com/lucacasonato/fresh
+
+- Makefile
+```
+step46_1303 denochat_ui:
+	deno install -A -f --no-check -n fresh https://raw.githubusercontent.com/lucacasonato/fresh/main/cli.ts
+	cd denochat && fresh init ui
+```
+
+### Run Local environment
+- Makefile
+```
+step46_1304 denochat_deployctl_local:
+	cd denochat/ui && deployctl run --no-check --watch main.ts
+```
+
+### ui Run Local fetch online api
+- denochat/ui/pages/index.tsx
+```tsx
+import { h, IS_BROWSER, useState, useEffect, useCallback } from "../deps.ts";
+interface Message {
+  text: string;
+}
+export default function Home() {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const getMessages = useCallback( async () => {
+    const res = await fetch('https://denochat-api.simpledoers.com/messages');
+    const data = await res.json();
+    setMessages(data);
+  }, []);
+  useEffect( () => {
+    getMessages();
+  }, []);
+  return (
+    <div>
+      {JSON.stringify(messages)}
+    </div>
+  );
+}
+```
 
 
 
