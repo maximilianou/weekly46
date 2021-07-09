@@ -19,8 +19,8 @@ router
 
 const app  = new Application();
 
-app.use(router.routes());
 app.use( oakCors() );
+app.use(router.routes());
 app.use(router.allowedMethods());
 
 addEventListener('fetch', app.fetchEventHandler());
