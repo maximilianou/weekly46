@@ -43,6 +43,20 @@ git commit -m 'feat(api): deploy deno Hi!!'
 git push
 ```
 
+### Deploy changes 2 oak middelware Application
+- denochat/api/index.ts
+```ts
+import { Application  } from "https://deno.land/x/oak/mod.ts";
+const app  = new Application();
+app.use( (ctx) => {
+  ctx.response.body = 'Hi, from oak deno module!!';
+});
+addEventListener('fetch', app.fetchEventHandler());
+```
+
+### Deploy changes 3 oak middelware Router
+
+
 
 
 -----

@@ -1,5 +1,21 @@
-import { Application } from "https://deno.land/x/oak/mod.ts";
-//import { Application } from "https://deno.land/x/oak@v7.6.2/mod.ts";
+import { Application, Router } from 'https://deno.land/x/oak/mod.ts';
+
+const messages = [];
+
+const router = new Router();
+
+router
+  .get('/', (ctx, next) => {
+    ctx.response.body = 'Deno Chat Server:';
+  })
+  .get('/messages', (ctx, next) => {
+    ctx.response.body = messages;
+  })
+  .post('/messages', async (ctx, next) => {
+    const message = await ctx.request.body().value;
+    messages.push(message);
+    ctx.response.body = messages;
+  })
 
 const app  = new Application();
 
@@ -9,10 +25,3 @@ app.use( (ctx) => {
 
 addEventListener('fetch', app.fetchEventHandler());
 
-//addEventListener("fetch", (event) => {
-//  const response = new Response("Hi Deno Chat Step One!!", {
-//    status: 200, 
-//    headers: { "content-type": "text/plain"}
-//  });
-//  event.respondWith(response);
-//});
