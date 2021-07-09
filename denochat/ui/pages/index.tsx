@@ -18,6 +18,7 @@ export default function Home() {
   const onSendMessage = useCallback(async () => {
     await fetch('https://denochat-api.simpledoers.com/messages', {
       method: 'POST',
+      mode: 'cors',
       headers: {
         'content-type':'application/json'
       },
