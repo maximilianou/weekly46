@@ -26,7 +26,7 @@ export default function Home() {
       })
     });
     setText('');
-    getMessages();
+//    getMessages();
   }, [text]);
   return (
     <div>
