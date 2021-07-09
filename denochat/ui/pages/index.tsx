@@ -8,7 +8,7 @@ export default function Home() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [text, setText] = useState("");
   const getMessages = useCallback( async () => {
-    const res = await fetch('https://denochat-api.simpledoers.com/messages');
+    const res = await fetch('https://denochat-api.simpledoers.com/messages/');
     const data = await res.json();
     setMessages(data);
   }, []);
@@ -16,17 +16,17 @@ export default function Home() {
     getMessages();
   }, []);
   const onSendMessage = useCallback(async () => {
-    await fetch('https://denochat-api.simpledoers.com/messages', {
+    await fetch('https://denochat-api.simpledoers.com/messages/', {
       method: 'POST',
       headers: {
-        'content-type':'application/json'
+        'Content-Type':'application/json'
       },
       body: JSON.stringify({
         text
       })
     });
     setText('');
-    getMessages();
+//    getMessages();
   }, [text]);
   return (
     <div>
