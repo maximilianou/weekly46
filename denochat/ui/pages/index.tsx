@@ -26,7 +26,7 @@ export default function Home() {
       })
     });
     setText('');
-//    getMessages(); // failed to fetch 'https://cdn.esm.sh/v42/node_process.js': HTTP status server error (500 Internal Server Error) for url (https://cdn.esm.sh/v42/node_process.js)
+//    getMessages(); // failed to fetch 
   }, [text]);
   return (
     <div>
