@@ -221,6 +221,21 @@ app.use(router.allowedMethods());
 addEventListener('fetch', app.fetchEventHandler());
 ```
 
+### ui Deploy
+- https://github.com/maximilianou/weekly46/blob/main/denochat/ui/main.ts
+- https://dash.deno.com/projects -> create new project -> weekly46-denochat-ui
+- https://dash.deno.com/projects -> settings -> Git -> https://github.com/maximilianou/weekly46/blob/main/denochat/ui/main.ts -> Link
+- https://dash.deno.com/projects -> settings -> Domain 
+- DNS - your domain name registered/subdomain redirecto to .. 
+```
+A     denochat.simpledoers.com  34... 
+AAAA  denochat.simpledoers.com  26::0::: 
+TXT   denochat.simpledoers.com  deno-com-validation=1...
+```
+- Validate - https://dash.deno.com/projects -> settings -> Domain
+- TLS - Get Automatic Certificate - https://dash.deno.com/projects -> settings -> Domain
+
+
 
 -----
 -----
