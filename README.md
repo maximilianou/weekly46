@@ -7,6 +7,13 @@
 
 
 ### Deno Chat Deploy
+
+- <https://denochat.simpledoers.com>
+- <https://weekly46-denochat-ui.deno.dev/>
+
+- <https://denochat-api.simpledoers.com>
+- <https://weekly46-denochat-api.deno.dev>
+
 #### Deno install
 
 - https://deno.land/
